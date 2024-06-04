@@ -1,0 +1,27 @@
+[package]
+name = "amm"
+version = "0.1.0"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "amm"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+
+[dependencies]
+anchor-lang = { version = "0.30.0", features = ["init-if-needed"] }
+anchor-spl = "0.30.0"
+getrandom = { version = "0.2.9", features = ["custom"] }
+winnow="=0.6.9"
+toml_datetime="=0.6.6"
+constant-product-curve = { git = "https://github.com/deanmlittle/constant-product-curve.git" }
+bytemuck = "1.16.0"
+
