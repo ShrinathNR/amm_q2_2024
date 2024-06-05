@@ -17,7 +17,8 @@ pub struct Swap<'info> {
     #[account(
         mut,
         seeds = [b"lp", config.key().as_ref()],
-        bump = config.lp_bump,
+        // bump = config.lp_bump,
+        bump,
         mint::decimals = 6,
         mint::authority = auth
     )]

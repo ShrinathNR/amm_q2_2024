@@ -13,15 +13,15 @@ pub struct Initialize<'info> {
     pub initializer: Signer<'info>,
     pub mint_x: Box<InterfaceAccount<'info, Mint>>,
     pub mint_y: Box<InterfaceAccount<'info, Mint>>,
-    #[account(
-        init,
-        seeds = [b"lp", config.key.as_ref()],
-        bump,
-        payer = initializer,
-        mint::decimals = 6,
-        mint::authority = auth
-    )]
-    pub mint_lp: Box<InterfaceAccount<'info, Mint>>,
+    // #[account(
+    //     init,
+    //     seeds = [b"lp", config.key.as_ref()],
+    //     bump,
+    //     payer = initializer,
+    //     mint::decimals = 6,
+    //     mint::authority = auth
+    // )]
+    // pub mint_lp: Box<InterfaceAccount<'info, Mint>>,
     #[account(
         init, 
         payer = initializer,
@@ -64,7 +64,7 @@ impl<'info> Initialize<'info> {
         authority: Option<Pubkey>,
     ) -> Result<()> {
         require!(fee<=10000, AmmError::FeePercentErr);
-        self.config.init(seed, authority, self.mint_x.key(), self.mint_y.key(), fee, bumps.auth, bumps.config, bumps.mint_lp);
+        self.config.init(seed, authority, self.mint_x.key(), self.mint_y.key(), fee, bumps.auth, bumps.config);
         Ok(())
     }
 }
