@@ -15,10 +15,10 @@ pub struct Deposit<'info> {
     pub mint_x: Box<InterfaceAccount<'info, Mint>>,
     pub mint_y: Box<InterfaceAccount<'info, Mint>>,
     #[account(
-        mut,
+        init,
         seeds = [b"lp", config.key().as_ref()],
-        // bump = config.lp_bump,
         bump,
+        payer = user,
         mint::decimals = 6,
         mint::authority = auth
     )]
