@@ -15,7 +15,7 @@ pub struct Deposit<'info> {
     pub mint_x: Box<InterfaceAccount<'info, Mint>>,
     pub mint_y: Box<InterfaceAccount<'info, Mint>>,
     #[account(
-        init,
+        init_if_needed,
         seeds = [b"lp", config.key().as_ref()],
         bump,
         payer = user,
