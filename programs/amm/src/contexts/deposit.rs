@@ -48,7 +48,8 @@ pub struct Deposit<'info> {
     )]
     pub user_y: Box<InterfaceAccount<'info, TokenAccount>>,
     #[account(
-        mut,
+        init_if_needed,
+        payer = user,
         associated_token::mint = mint_lp,
         associated_token::authority = user,
     )]
@@ -93,8 +94,8 @@ impl<'info> Deposit<'info> {
 
         require!(x<=max_x && y<=max_y, AmmError::SlippageExceeded);
 
-        self.deposit_tokens(true, x);
-        self.deposit_tokens(false, y);
+        self.deposit_tokens(true, x)?;
+        self.deposit_tokens(false, y)?;
         self.mint_lp_tokens(amount)
     }
     pub fn deposit_tokens(
